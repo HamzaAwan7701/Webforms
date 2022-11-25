@@ -46,7 +46,7 @@
                
                 <td>
 
-                    <asp:TextBox ID="txtpassword" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtpassword" runat="server" OnTextChanged="txtpassword_TextChanged"></asp:TextBox>
 
 
                 </td>

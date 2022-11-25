@@ -27,8 +27,8 @@ namespace Webforms
             adpt.Fill(tb);
             if (tb.Rows.Count>0)
             {
-                if (username == "Hamza" && password == "123"|| (username == "Asad" && password == "123")) 
-                { return "OK"; }
+                
+                 return "OK"; 
 
             }
             
@@ -43,7 +43,73 @@ namespace Webforms
             return "x";
 
         }
+        public string createuser(string username, string password)
+        {
+            try
+            {
 
+                conn = new SqlConnection(connstr);
+                conn.Open();
+                string query = "Insert into webform_login values('" + username + "', '" + password + "')";
+
+                cmd = new SqlCommand(query, conn);
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return "OK";
+
+
+
+                }
+
+
+                conn.Close();
+                return "error";
+
+
+
+            }
+            catch(Exception exp) 
+            {
+                return "error";
+            }
+           
+
+
+        }
+
+
+        public string deleteuser(string username)
+        {
+            conn = new SqlConnection(connstr);
+
+            conn.Open();
+            string query = "Delete from webform_login where (user_name='"+username+"')";
+            cmd = new SqlCommand(query, conn);
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+
+                return "OK";
+            }
+            else
+            {
+
+                return "KO";
+            }
+            conn.Close();   
+        }
+
+
+
+        //public updateuser(string username)
+        //{ conn = new SqlConnection(connstr);
+        //conn.Open();
+        //    string query=
+        
+        
+        
+        //}
+             
+ 
 
     }
 }
