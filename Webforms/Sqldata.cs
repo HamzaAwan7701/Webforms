@@ -18,7 +18,7 @@ namespace Webforms
 
         public string validateuser(string username, string password)
         {
-
+           
             conn= new SqlConnection(connstr); 
             conn.Open();
           string query="select * from webform_login where (user_name= '"+username+"' and password='"+password+"')";
@@ -40,7 +40,7 @@ namespace Webforms
             {
                 return "KO";
             }
-            return "x";
+           
 
         }
         public string createuser(string username, string password)
@@ -95,21 +95,77 @@ namespace Webforms
 
                 return "KO";
             }
-            conn.Close();   
+              
         }
 
 
 
-        //public updateuser(string username)
-        //{ conn = new SqlConnection(connstr);
-        //conn.Open();
-        //    string query=
-        
-        
-        
-        //}
-             
- 
+        public string updateuser(string username, string password)
+        {
+            conn = new SqlConnection(connstr);
+            conn.Open();
+
+           
+           
+            
+                string query = "Update webform_login set password='" + password + "' where(user_name='" + username + "')";
+            cmd= new SqlCommand(query, conn);   
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return "true";
+                }
+                else
+                {
+
+                    return "false";
+
+                }
+
+            }
+      
+
+            
+            
+            
+            
+            
+            
+
+        public string update_search(string username)
+        {
+
+            conn = new SqlConnection(connstr);
+
+            conn.Open();
+            string query = "Select * from webform_login where(user_name='"+username+"')";
+            cmd = new SqlCommand(query, conn);
+            adpt = new SqlDataAdapter(cmd);
+            adpt.Fill(tb);
+            if (tb.Rows.Count > 0)
+            {
+                
+                        
+                return "OK";
+
+            }
+
+
+
+
+
+            else
+            {
+                return "KO";
+            }
+
+
+
+
+        }
+
+
+
+
 
     }
 }
